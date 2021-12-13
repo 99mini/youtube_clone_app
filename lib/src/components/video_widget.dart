@@ -55,7 +55,7 @@ class VideoWidget extends StatelessWidget {
                       color: Colors.black.withOpacity(0.8),
                     ),
                   ),
-                  Text(" · "),
+                  const Text(" · "),
                   Text(
                     "조회수 1000회",
                     style: TextStyle(
@@ -63,7 +63,7 @@ class VideoWidget extends StatelessWidget {
                       color: Colors.black.withOpacity(0.6),
                     ),
                   ),
-                  Text(" · "),
+                  const Text(" · "),
                   Text(
                     "2021-12-13",
                     style: TextStyle(
