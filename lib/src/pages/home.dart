@@ -1,13 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:youtube_clone_app2/src/components/custom_appbar.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: Center(child: Text("홈")),
+    return SafeArea(
+      child: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            title: Container(
+              child: CustomAppBar(),
+            ),
+            floating: true,
+            snap: true,
+          ),
+          SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    height: 150,
+                    color: Colors.grey,
+                  ),
+                );
+              },
+              childCount: 10,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

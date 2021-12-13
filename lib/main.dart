@@ -17,7 +17,19 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Youtube clone 2',
       theme: ThemeData(
-          primarySwatch: Colors.blue,
+          primaryColor: Colors.white,
+          primarySwatch: const MaterialColor(0xFFffffff, {
+            50: Color(0xffffffff),
+            100: Color(0xffffffff),
+            200: Color(0xffffffff),
+            300: Color(0xffffffff),
+            400: Color(0xffffffff),
+            500: Color(0xffffffff),
+            600: Color(0xffffffff),
+            700: Color(0xffffffff),
+            800: Color(0xffffffff),
+            900: Color(0xffffffff),
+          }),
           visualDensity: VisualDensity.adaptivePlatformDensity),
       initialBinding: InitBinding(),
       initialRoute: "/",
