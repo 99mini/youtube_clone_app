@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:youtube_clone_app2/src/bindings/init_binding.dart';
 
 import 'src/app.dart';
+import 'src/components/youtube_detail.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,6 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Youtube clone 2',
       theme: ThemeData(
           primaryColor: Colors.white,
@@ -37,7 +39,11 @@ class MyApp extends StatelessWidget {
         GetPage(
           name: "/",
           page: () => App(),
-        )
+        ),
+        GetPage(
+          name: "/detail/:videoId",
+          page: () => YoutubeDetail(),
+        ),
       ],
     );
   }

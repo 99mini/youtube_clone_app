@@ -40,7 +40,7 @@ class CustomAppBar extends StatelessWidget {
           backgroundImage: Image.network(
                   "https://yt3.ggpht.com/yti/APfAmoHFe-HsMxsZgC-FWKqrDHl6p6hixuakc9TytQ=s88-c-k-c0x00ffffff-no-rj-mo")
               .image,
-        )
+        ),
       ],
     );
   }
