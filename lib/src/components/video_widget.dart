@@ -1,12 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:youtube_clone_app2/src/models/video.dart';
 
-class VideoWidget extends StatelessWidget {
-  const VideoWidget({Key? key}) : super(key: key);
+class VideoWidget extends StatefulWidget {
+  final Video video;
+  const VideoWidget({Key? key, required this.video}) : super(key: key);
 
+  @override
+  State<VideoWidget> createState() => _VideoWidgetState();
+}
+
+class _VideoWidgetState extends State<VideoWidget> {
   Widget _thumbnail() {
     return Container(
       height: 250,
       color: Colors.grey.withOpacity(0.23),
+      child: Image.network(
+        widget.video.snippet.thumbnails.medium.url,
+        fit: BoxFit.fitHeight,
+      ),
     );
   }
 
@@ -22,7 +34,7 @@ class VideoWidget extends StatelessWidget {
                     "https://yt3.ggpht.com/yti/APfAmoHFe-HsMxsZgC-FWKqrDHl6p6hixuakc9TytQ=s88-c-k-c0x00ffffff-no-rj-mo")
                 .image,
           ),
-          SizedBox(width: 15),
+          const SizedBox(width: 15),
           Expanded(
               child: Column(
             children: [
@@ -31,7 +43,7 @@ class VideoWidget extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Text(
-                      "단기금융상품들 이해하기 (RP/MMF/발행어음)",
+                      widget.video.snippet.title,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -49,7 +61,7 @@ class VideoWidget extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    "박곰희",
+                    widget.video.snippet.channelTitle,
                     style: TextStyle(
                       fontSize: 12,
                       color: Colors.black.withOpacity(0.8),
@@ -65,7 +77,8 @@ class VideoWidget extends StatelessWidget {
                   ),
                   const Text(" · "),
                   Text(
-                    "2021-12-13",
+                    DateFormat("yyyy-MM-dd")
+                        .format(widget.video.snippet.publishedAt),
                     style: TextStyle(
                       fontSize: 12,
                       color: Colors.black.withOpacity(0.6),
