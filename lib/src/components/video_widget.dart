@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:youtube_clone_app2/src/controllers/video_controller.dart';
 import 'package:youtube_clone_app2/src/models/video.dart';
 
 class VideoWidget extends StatefulWidget {
   final Video video;
+
   const VideoWidget({Key? key, required this.video}) : super(key: key);
 
   @override
@@ -11,6 +14,15 @@ class VideoWidget extends StatefulWidget {
 }
 
 class _VideoWidgetState extends State<VideoWidget> {
+  late VideoController _videoController;
+
+  @override
+  void initState() {
+    _videoController = Get.put(VideoController(video: widget.video),
+        tag: widget.video.id.videoId);
+    super.initState();
+  }
+
   Widget _thumbnail() {
     return Container(
       height: 250,
@@ -27,13 +39,14 @@ class _VideoWidgetState extends State<VideoWidget> {
       padding: const EdgeInsets.only(left: 10, bottom: 20),
       child: Row(
         children: [
-          CircleAvatar(
-            radius: 30,
-            backgroundColor: Colors.grey.withOpacity(0.5),
-            backgroundImage: Image.network(
-                    "https://yt3.ggpht.com/yti/APfAmoHFe-HsMxsZgC-FWKqrDHl6p6hixuakc9TytQ=s88-c-k-c0x00ffffff-no-rj-mo")
-                .image,
-          ),
+          Obx(() {
+            return CircleAvatar(
+              radius: 30,
+              backgroundColor: Colors.grey.withOpacity(0.5),
+              backgroundImage:
+                  Image.network(_videoController.youtuberThumbnailUrl).image,
+            );
+          }),
           const SizedBox(width: 15),
           Expanded(
               child: Column(
@@ -68,13 +81,15 @@ class _VideoWidgetState extends State<VideoWidget> {
                     ),
                   ),
                   const Text(" · "),
-                  Text(
-                    "조회수 1000회",
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: Colors.black.withOpacity(0.6),
-                    ),
-                  ),
+                  Obx(() {
+                    return Text(
+                      _videoController.viewCountString,
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: Colors.black.withOpacity(0.6),
+                      ),
+                    );
+                  }),
                   const Text(" · "),
                   Text(
                     DateFormat("yyyy-MM-dd")
